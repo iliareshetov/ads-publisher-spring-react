@@ -1,0 +1,13 @@
+.git
+.settings
+.idea
+**/*.class
+*.md
+
+**/build
+**/bin
+*.text
+.gradle
+**/*.project
+**/*.log
+**/*.bat
