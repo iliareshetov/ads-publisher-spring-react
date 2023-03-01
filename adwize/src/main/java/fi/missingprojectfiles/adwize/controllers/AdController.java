@@ -8,6 +8,8 @@ import fi.missingprojectfiles.adwize.response.ad.AdModel;
 import fi.missingprojectfiles.adwize.response.ad.DeleteAdResponse;
 import fi.missingprojectfiles.adwize.response.ad.MessageType;
 import fi.missingprojectfiles.adwize.services.AdService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +24,15 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 public class AdController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AdController.class);
+
     @Autowired
     private AdService adService;
 
     @GetMapping(path = "/ads",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<AdModel> getAds() {
+        logger.info("GET /api/ads");
         return adService.getAds().stream()
                 .map(ad -> new AdDto(ad).toModel())
                 .collect(Collectors.toList());
